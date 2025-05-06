@@ -6,8 +6,8 @@ public class DriverFactory {
     public static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
     public static PropertiesReader readProp = new PropertiesReader();
 
-    public void setDriver(){
-        WebDriver driver = BrowserUtility.createDriverInstance(readProp.getConfigProperties().getProperty("browserType"));
+    public synchronized void setDriver(){
+        WebDriver driver = BrowserUtility.createWebDriverInstance(readProp.getConfigProperties().getProperty("browserType"));
         threadLocalDriver.set(driver);
     }
 
@@ -15,7 +15,7 @@ public class DriverFactory {
         return threadLocalDriver.get();
     }
 
-    public void removeDriver(){
+    public synchronized void removeDriver(){
        if(getDriver() != null) {
             getDriver().quit();
        }

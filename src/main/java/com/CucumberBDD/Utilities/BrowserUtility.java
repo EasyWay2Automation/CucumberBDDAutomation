@@ -3,6 +3,9 @@ package com.CucumberBDD.Utilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+import java.time.Duration;
 
 public class BrowserUtility {
     static WebDriver driver;
@@ -12,16 +15,18 @@ public class BrowserUtility {
      * @param browser String
      * @return  driver  WebDriver
      */
-    public static WebDriver createDriverInstance(String browser){
-
-        if(browser.equalsIgnoreCase("CHROME")){
-            driver = new ChromeDriver();
-        } else if (browser.equalsIgnoreCase("MS EDGE")) {
-            driver = new EdgeDriver();
+    public static WebDriver createWebDriverInstance(String browser){
+        switch (browser.toUpperCase()) {
+            case "CHROME" -> driver = new ChromeDriver();
+            case "EDGE" -> driver = new EdgeDriver();
+            case "FIREFOX" -> driver = new FirefoxDriver();
+            default -> {
+                System.out.println("Please validate your browser : " + browser);
+                System.exit(0);
+            }
         }
-        // Maximize Browser Window
         driver.manage().window().maximize();
-
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.TIMEOUT));
         return driver;
     }
 }
