@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Regression Test Suite">
-    <test verbose="2" preserve-order="true" name="Regression Test">
+    <test verbose="2" name="Regression Test">
         <classes>
-            <class name="com.CucumberBDD.Runner.TestRunner"></class>
+            <class name="com.CucumberBDD.Runner.TestRunner"/>
         </classes>
     </test>
 </suite>
